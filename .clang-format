@@ -1,0 +1,15 @@
+BasedOnStyle: Google
+BinPackParameters: false
+ColumnLimit: 100
+IncludeCategories:
+  - Regex:           '^"Prec\.h(pp)?"$'
+    Priority:        -1
+  - Regex:           '^<[^.]+\.h[p]*>$'
+    Priority:        2
+  - Regex:           '^<[^.]+>$'
+    Priority:        3
+  - Regex:           '^"[^.]+"$'
+    Priority:        4
+IncludeIsMainRegex: '$'
+Language:        Cpp
+Standard:        Latest
