@@ -5,11 +5,13 @@ project("files_sync_service")
 set(APP ${PROJECT_NAME})
 
 set(SRC
+    src/dir_sniffer.ixx
+
     main.cpp
 )
 
 add_executable(${APP} ${SRC})
-set_property(TARGET ${APP} PROPERTY CXX_STANDARD 20)
+set_property(TARGET ${APP} PROPERTY CXX_STANDARD 23)
 
 # Install
 install(TARGETS ${APP} DESTINATION ${CMAKE_SOURCE_DIR}/out/bin)
@@ -28,7 +30,7 @@ if (TESTS_ENABLED)
   )
 
   add_executable(${TST_APP} ${SRC_TESTS})
-  set_property(TARGET ${TST_APP} PROPERTY CXX_STANDARD 20)
+  set_property(TARGET ${TST_APP} PROPERTY CXX_STANDARD 23)
 
   # Install
   install(TARGETS ${TST_APP} DESTINATION ${CMAKE_SOURCE_DIR}/out/bin_tests)
