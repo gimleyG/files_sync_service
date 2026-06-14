@@ -1,6 +1,14 @@
-#include <iostream>
+#include <print>
 
-void LaunchTests() { std::cout << "Run tests" << std::endl; }
+#include "different_tests.hpp"
+
+void LaunchTests() {
+  std::println("Run all tests...");
+
+  Tests::DirSnifferTests();
+
+  std::println("Completed.");
+}
 
 int main(int argc, char** argv) {
   LaunchTests();

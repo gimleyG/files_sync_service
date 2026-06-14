@@ -2,16 +2,28 @@
 
 project("files_sync_service")
 
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(APP ${PROJECT_NAME})
 
-set(SRC
-    src/dir_sniffer.ixx
-
-    main.cpp
+# Application library
+set(APP_LIB ${APP}-lib)
+set(APP_LIB_SRC
+  src/dir_sniffer.ixx
+)
+add_library(${APP_LIB} STATIC
+  ${APP_LIB_SRC}
 )
 
+# Application
+set(SRC
+  main.cpp
+)
 add_executable(${APP} ${SRC})
-set_property(TARGET ${APP} PROPERTY CXX_STANDARD 23)
+target_link_libraries(${APP}
+  PRIVATE ${APP_LIB}
+)
 
 # Install
 install(TARGETS ${APP} DESTINATION ${CMAKE_SOURCE_DIR}/out/bin)
@@ -26,11 +38,17 @@ if (TESTS_ENABLED)
   set(TST_APP ${PROJECT_NAME}-tst)
 
   set(SRC_TESTS
+    tests/different_tests.hpp
+
+    tests/dir_sniffer_tests.cpp
+
     tests/tests_main.cpp
   )
 
   add_executable(${TST_APP} ${SRC_TESTS})
-  set_property(TARGET ${TST_APP} PROPERTY CXX_STANDARD 23)
+  target_link_libraries(${TST_APP}
+    PRIVATE ${APP_LIB}
+  )
 
   # Install
   install(TARGETS ${TST_APP} DESTINATION ${CMAKE_SOURCE_DIR}/out/bin_tests)
